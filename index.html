@@ -1,0 +1,135 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yisen's Personal Website</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <div class="container mx-auto p-6 max-w-4xl">
+    <!-- 上部：左侧头像+机构+联系方式，右侧个人介绍 -->
+    <div class="flex flex-col md:flex-row gap-6 mb-8">
+      <!-- 左侧栏：头像、机构、联系方式 -->
+      <div class="md:w-1/3 bg-white rounded-lg shadow-lg p-6 text-center">
+        <img src="image/photo3.png" alt="Eason 的头像" class="w-32 h-32 rounded-full mx-auto mb-4">
+        <h2 class="text-xl font-semibold text-gray-800">Yisen Gao</h2>
+        <p class="text-gray-600 mb-2">Mphil Student</p>
+        <p class="text-gray-600 mb-4">The Hong Kong University of Science and Technology</p>
+        <div class="text-gray-600">
+          <p><strong>Email:</strong> <a href="mailto:ygaodi@cse.ust.hk" class="text-blue-500 hover:underline">ygaodi@cse.ust.hk</a></p>
+        </div>
+      </div>
+      <!-- 右侧：个人介绍 -->
+      <div class="md:w-2/3 bg-white rounded-lg shadow-lg p-6">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Introduction</h2>
+        <p class="text-gray-600">Hello! I am Yisen Gao, an Mphil student in HKUST-KnowComp supervised by <strong><a href="https://home.cse.ust.hk/~yqsong/" target="_blank" class="text-blue-500 hover:underline">Prof. Yangqiu Song</a></strong>. I get the bachelor's degree in Artificial Intelligence from Beihang University in June, 2025. 
+          I have been an intern in Magic Group for two years supervised by Prof. Jianxin Li, Prof. Qingyun Sun, and Prof. Xingcheng Fu. 
+          I got the <strong>Beijing Natural Science Foundation</strong> in 2024. I also served as a reviewer/program committee member for the top conferences including IJCAI, ACL, AAAI, ICLR. 
+          My google scholar is <a href="https://scholar.google.com/citations?user=MMxR_uYAAAAJ&hl=en" class="text-blue-500 hover:underline">here</a>. For any intention of cooperation, please feel free to contact me. </p>
+      </div>
+    </div>
+    <!-- 下部：研究兴趣 -->
+    <section class="bg-white rounded-lg shadow-lg p-6 mb-8">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-4">Research Interests</h2>
+      <ul class="list-disc list-inside text-gray-600">
+        <li><strong>Neural Graph Database:</strong> Build a foundation model for understanding the graph database.</li>
+        <li><strong>Abductive Reasoning:</strong> Study the fusion of deductive reasoning and abductive reasoning.</li>
+        <li><strong>AI for Mathematics:</strong> Explore autonomous AI mathematicians.</li>
+        <li><strong>Geometric Deep Learning:</strong> Understand data through the perspective of Riemannian geometry.</li>
+      </ul>
+    </section>
+    <!-- 下部：参会经历 -->
+    <section class="bg-white rounded-lg shadow-lg p-6 mb-8">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-4">Publication</h2>
+      <ul class="list-none text-gray-600">
+        <li class="mb-4" style="list-style-type: disc; margin-left: 20px;">
+          One paper has been accepted by <strong>NeurIPS 2025.</strong>
+        </li>
+        <li class="mb-4" style="list-style-type: disc; margin-left: 20px;">
+          One paper has been accepted by <strong>CVPR 2025.</strong>
+        </li>
+        <li class="mb-4" style="list-style-type: disc; margin-left: 20px;">
+          Three papers have been accepted by <strong>AAAI 2025.</strong>
+        </li>
+        <li class="mb-4" style="list-style-type: disc; margin-left: 20px;">
+          One paper has been accepted by <strong>ICML 2024.</strong>
+        </li>
+      </ul>
+    </section>
+
+    <!-- 下部：参会经历 -->
+    <section class="bg-white rounded-lg shadow-lg p-6 mb-8">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-4">Conference Attendance</h2>
+      <ul class="list-none text-gray-600">
+        <li class="mb-4">
+          <strong>I will attend EMNLP 2025 in Nov 2025, Suzhou, China.</strong> 
+          <br> Thanks for the support by Prof. Yangqiu Song.
+        </li>
+        <li class="mb-4">
+          <strong>I have attended IJCAI 2025 in Aug 2025, Guangzhou, China.</strong> 
+          <br> Thanks for the accommodation support by Prof. Qingyun Sun and Yi Huang.
+        </li>
+        <li class="mb-4">
+          <strong>I have attended ICLR 2025 in April 2025, Singapore.</strong>
+          <p>Thanks for the support by Beijing Natural Science Foundation.</p>
+        </li>
+        <li class="mb-4">
+          <strong>I have attended ICML 2024 in July 2024, Vienna, Austria.</strong>
+          <br> Thanks for the accommodation support by Prof. Xingcheng Fu.
+        </li>
+      </ul>
+    </section>
+
+    
+
+    <!-- 下部：个人爱好 -->
+    <section class="bg-white rounded-lg shadow-lg p-6">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-4">Personal Interests</h2>
+      <ul class="list-disc list-inside text-gray-600">
+        <li>Cooking: I really enjoy delicious food and look forward to exploring diverse and novel taste combinations.</li>
+        <li>Music: I love listening to various genres of music and I am the fan of Yichun Shan.</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>
