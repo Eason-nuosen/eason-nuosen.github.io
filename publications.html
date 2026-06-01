@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Publications by Yisen Gao.">
+  <title>Publications | Yisen Gao</title>
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #5f6d7e;
+      --line: #d9e0e8;
+      --paper: #ffffff;
+      --soft: #f5f7fb;
+      --accent: #0f766e;
+      --accent-dark: #115e59;
+      --blue: #2454a6;
+      --shadow: 0 18px 45px rgba(23, 32, 51, 0.1);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      background:
+        linear-gradient(135deg, rgba(15, 118, 110, 0.11), transparent 34%),
+        linear-gradient(315deg, rgba(183, 121, 31, 0.12), transparent 30%),
+        var(--soft);
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--accent-dark);
+      text-decoration: underline;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(217, 224, 232, 0.8);
+      background: rgba(245, 247, 251, 0.86);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 64px;
+      gap: 20px;
+    }
+
+    .brand {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 16px;
+      font-size: 0.94rem;
+      font-weight: 650;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+    }
+
+    .hero {
+      padding: 72px 0 44px;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--accent-dark);
+      font-size: 0.82rem;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(3rem, 7vw, 5.6rem);
+      line-height: 0.98;
+    }
+
+    .subtitle {
+      max-width: 760px;
+      margin: 20px 0 0;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.24rem);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.72);
+      font-weight: 750;
+      box-shadow: 0 7px 18px rgba(23, 32, 51, 0.06);
+    }
+
+    .button:hover {
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+    .section {
+      padding: 42px 0 58px;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-head {
+      margin-bottom: 26px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(1.7rem, 3vw, 2.35rem);
+      line-height: 1.1;
+    }
+
+    .publication-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .publication {
+      display: grid;
+      grid-template-columns: 120px minmax(0, 1fr);
+      gap: 20px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: 0 10px 26px rgba(23, 32, 51, 0.055);
+    }
+
+    .venue {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 94px;
+      min-height: 34px;
+      padding: 5px 8px;
+      border-radius: var(--radius);
+      color: #0f3f3b;
+      background: #dff4ef;
+      font-size: 0.82rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .venue.alt {
+      color: #583b02;
+      background: #f8ead0;
+    }
+
+    .venue.blue {
+      color: #183e7a;
+      background: #e2ebfb;
+    }
+
+    .publication h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+      line-height: 1.28;
+    }
+
+    .authors {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .authors strong {
+      color: var(--ink);
+    }
+
+    .cofirst {
+      color: #000;
+      font-weight: 950;
+      font-size: 0.72em;
+      line-height: 0;
+      vertical-align: super;
+    }
+
+    .pub-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+      font-size: 0.91rem;
+      font-weight: 750;
+    }
+
+    .pub-links a {
+      padding: 4px 9px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      color: var(--accent-dark);
+      background: #f9fbfd;
+    }
+
+    .pub-links a:hover {
+      text-decoration: none;
+      background: #eff8f6;
+    }
+
+    footer {
+      padding: 34px 0 48px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 860px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px 0;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+        gap: 12px;
+      }
+
+      .hero {
+        padding-top: 42px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .page {
+        width: min(100% - 24px, 1120px);
+      }
+
+      .publication {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="page nav" aria-label="Main navigation">
+      <a class="brand" href="index.html">Yisen Gao</a>
+      <div class="nav-links">
+        <a href="index.html#about">About</a>
+        <a href="index.html#research">Research</a>
+        <a href="index.html#publications">Selected</a>
+        <a href="publications.html">All Publications</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page">
+    <section class="hero">
+      <p class="eyebrow">Publication list</p>
+      <h1>Publications</h1>
+      <p class="subtitle">
+        Complete publication list with one paper link per item. arXiv/CoRR-only papers are labeled as preprint.
+        Equal contribution is marked with a black <span class="cofirst">*</span> on the author name.
+      </p>
+      <div class="actions">
+        <a class="button" href="index.html#publications">Selected Publications</a>
+        <a class="button" href="https://dblp.org/pid/377/2092.html" target="_blank" rel="noopener noreferrer">DBLP</a>
+        <a class="button" href="https://scholar.google.com/citations?user=MMxR_uYAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Google Scholar</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>2026</h2>
+      </div>
+      <div class="publication-list">
+        <article class="publication">
+          <div><span class="venue">ICLR 2026</span></div>
+          <div>
+            <h3>Controllable Logical Hypothesis Generation for Abductive Reasoning in Knowledge Graphs.</h3>
+            <div class="authors"><strong>Yisen Gao</strong>, Jiaxin Bai, Tianshi Zheng, Ziwei Zhang, Qingyun Sun, Xingcheng Fu, Jianxin Li, Yangqiu Song.</div>
+            <div class="pub-links"><a href="https://openreview.net/forum?id=oTgJg0M9kY" target="_blank" rel="noopener noreferrer">paper</a></div>
+          </div>
+        </article>
+
+        <article class="publication">
+          <div><span class="venue blue">preprint</span></div>
+          <div>
+            <h3>KGPFN: Unlocking the Potential of Knowledge Graph Foundation Model via In-Context Learning.</h3>
+            <div class="authors"><strong>Yisen Gao</strong>, Jiaxin Bai, Haoyu Huang, Zhongwei Xie, Yufei Li, Hong Ting Tsang, Sirui Han, Yangqiu Song.</div>
+            <div class="pub-links"><a href="https://arxiv.org/abs/2605.14907" target="_blank" rel="noopener noreferrer">paper</a></div>
+          </div>
+        </article>
+
+        <article class="publication">
+          <div><span class="venue blue">preprint</span></div>
+          <div>
+            <h3>HypoAgent: An Agentic Framework for Interactive Abductive Hypothesis Generation over Knowledge Graphs.</h3>
+            <div class="authors"><strong>Yisen Gao</strong>, Yixi Cai, Tianshi Zheng, Jiaxin Bai, Yangqiu Song.</div>
+            <div class="pub-links"><a href="https://arxiv.org/abs/2605.31370" target="_blank" rel="noopener noreferrer">paper</a></div>
+          </div>
+        </article>
+
+        <article class="publication">
+          <div><span class="venue">WWW 2026</span></div>
+          <div>
+            <h3>Unifying Deductive and Abductive Reasoning in Knowledge Graphs with Masked Diffusion Model.</h3>
+            <div class="authors"><strong>Yisen Gao</strong>, Jiaxin Bai, Yi Huang, Xingcheng Fu, Qingyun Sun, Yangqiu Song.</div>
+            <div class="pub-links"><a href="https://doi.org/10.1145/3774904.3792133" target="_blank" rel="noopener noreferrer">paper</a></div>
+          </div>
+        </article>
+
+        <article class="publication">
+          <div><span class="venue">WWW 2026</span></div>
+          <div>
+            <h3>Graph Diffusion Evolution Model for Multi-Conditional Molecular Generation.</h3>
+            <div class="authors">Xingcheng Fu, Lingyun Liu, <strong>Yisen Gao</strong>, Tianyu Chen, Qingyun Sun, Jianxin Li, Xianxian Li.</div>
+            <div class="pub-links"><a href="https://doi.org/10.1145/3774904.3792118" target="_blank" rel="noopener noreferrer">paper</a></div>
+          </div>
+        </article>
+
+        <article class="publication">
+          <div><span class="venue">WWW 2026</span></div>
+          <div>
+            <h3>Towards Geometry-Consistent Federated Graph Learning.</h3>
+            <div class="authors">Yuecen Wei, Zhiyu Zhuang, <strong>Yisen Gao</strong>, Xingcheng Fu, Qingyun Sun, Ziwei Zhang, Tianyu Wo, Chunming Hu.</div>
+            <div class="pub-links"><a href="https://doi.org/10.1145/3774904.3792655" target="_blank" rel="noopener noreferrer">paper</a></div>
+          </div>
+        </article>
+
+        <article class="publication">
+          <div><span class="venue alt">AAAI 2026</span></div>
+          <div>
+            <h3>Towards LLM-Empowered Knowledge Tracing via LLM-Student Hierarchical Behavior Alignment in Hyperbolic Space.</h3>
+            <div class="authors">Xingcheng Fu, Shengpeng Wang, <strong>Yisen Gao</strong>, Xianxian Li, Chunpei Li, Qingyun Sun, Dongran Yu.</div>
+            <div class="pub-links"><a href="https://doi.org/10.1609/aaai.v40i17.38494" target="_blank" rel="noopener noreferrer">paper</a></div>
+          </div>
+        </article>
+
+        <article class="publication">
+          <div><span class="venue alt">AAAI 2026</span></div>
+          <div>
+            <h3>Is the Information Bottleneck Robust Enough? Towards Label-Noise Resistant Information Bottleneck Learning.</h3>
+            <div class="authors">Yi Huang, Qingyun Sun, <strong>Yisen Gao</strong>, Haonan Yuan, Xingcheng Fu, Jianxin Li.</div>
+            <div class="pub-links"><a href="https://doi.org/10.1609/aaai.v40i26.39363" target="_blank" rel="noopener noreferrer">paper</a></div>
+          </div>
+        </article>
+
+        <article class="publication">
+          <div><span class="venue blue">preprint</span></div>
+          <div>
+            <h3>NGDB-Zoo: Towards Efficient and Scalable Neural Graph Databases Training.</h3>
+            <div class="authors">Zhongwei Xie, Jiaxin Bai, Shujie Liu, Haoyu Huang, Yufei Li, <strong>Yisen Gao</strong>, Hong Ting Tsang, Yangqiu Song.</div>
+            <div class="pub-links"><a href="https://doi.org/10.48550/arXiv.2602.21597" target="_blank" rel="noopener noreferrer">paper</a></div>
+          </div>
+        </article>
+
+        <article class="publication">
+          <div><span class="venue blue">preprint</span></div>
+          <div>
+            <h3>Towards Neural Graph Data Management.</h3>
+            <div class="authors">Yufei Li<sup class="cofirst">*</sup>, <strong>Yisen Gao<sup class="cofirst">*</sup></strong>, Jiaxin Bai, Jiaxuan Xiong, Haoyu Huang, Zhongwei Xie, Hong Ting Tsang, Yangqiu Song.</div>
+            <div class="pub-links"><a href="https://doi.org/10.48550/arXiv.2603.05529" target="_blank" rel="noopener noreferrer">paper</a></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>2025</h2>
+      </div>
+      <div class="publication-list">
+        <article class="publication">
+          <div><span class="venue">NeurIPS 2025</span></div>
+          <div>
+            <h3>Toward a Unified Geometry Understanding: Riemannian Diffusion Framework for Graph Generation and Prediction.</h3>
+            <div class="authors"><strong>Yisen Gao</strong>, Xingcheng Fu, Qingyun Sun, Jianxin Li, Xianxian Li.</div>
+            <div class="pub-links"><a href="https://openreview.net/forum?id=QQqDBRRslp" target="_blank" rel="noopener noreferrer">paper</a></div>
+          </div>
+        </article>
+
+        <article class="publication">
+          <div><span class="venue blue">DEBull 2025</span></div>
+          <div>
+            <h3>Top Ten Challenges Towards Agentic Neural Graph Databases.</h3>
+            <div class="authors">Jiaxin Bai, Zihao Wang, Yukun Zhou, Hang Yin, Weizhi Fei, Qi Hu, Zheye Deng, Jiayang Cheng, Tianshi Zheng, Hong Ting Tsang, <strong>Yisen Gao</strong>, Zhongwei Xie, Yufei Li, Lixin Fan, Binhang Yuan, Wei Wang, Lei Chen, Xiaofang Zhou, Yangqiu Song.</div>
+            <div class="pub-links"><a href="http://sites.computer.org/debull/A25mar/p104.pdf" target="_blank" rel="noopener noreferrer">paper</a></div>
+          </div>
+        </article>
+
+        <article class="publication">
+          <div><span class="venue alt">AAAI 2025</span></div>
+          <div>
+            <h3>GraphMoRE: Mitigating Topological Heterogeneity via Mixture of Riemannian Experts.</h3>
+            <div class="authors">Zihao Guo, Qingyun Sun, Haonan Yuan, Xingcheng Fu, Min Zhou, <strong>Yisen Gao</strong>, Jianxin Li.</div>
+            <div class="pub-links"><a href="https://doi.org/10.1609/aaai.v39i11.33279" target="_blank" rel="noopener noreferrer">paper</a></div>
+          </div>
+        </article>
+
+        <article class="publication">
+          <div><span class="venue alt">AAAI 2025</span></div>
+          <div>
+            <h3>Discrete Curvature Graph Information Bottleneck.</h3>
+            <div class="authors">Xingcheng Fu, Jian Wang, <strong>Yisen Gao</strong>, Qingyun Sun, Haonan Yuan, Jianxin Li, Xianxian Li.</div>
+            <div class="pub-links"><a href="https://doi.org/10.1609/aaai.v39i16.33831" target="_blank" rel="noopener noreferrer">paper</a></div>
+          </div>
+        </article>
+
+        <article class="publication">
+          <div><span class="venue alt">AAAI 2025</span></div>
+          <div>
+            <h3>Bi-Directional Multi-Scale Graph Dataset Condensation via Information Bottleneck.</h3>
+            <div class="authors">Xingcheng Fu<sup class="cofirst">*</sup>, <strong>Yisen Gao<sup class="cofirst">*</sup></strong>, Beining Yang, Yuxuan Wu, Haodong Qian, Qingyun Sun, Xianxian Li.</div>
+            <div class="pub-links"><a href="https://doi.org/10.1609/aaai.v39i16.33832" target="_blank" rel="noopener noreferrer">paper</a></div>
+          </div>
+        </article>
+
+        <article class="publication">
+          <div><span class="venue">CVPR 2025</span></div>
+          <div>
+            <h3>Galaxy Walker: Geometry-aware VLMs For Galaxy-scale Understanding.</h3>
+            <div class="authors">Tianyu Chen, Xingcheng Fu, <strong>Yisen Gao</strong>, Haodong Qian, Yuecen Wei, Kun Yan, Haoyi Zhou, Jianxin Li.</div>
+            <div class="pub-links"><a href="https://openaccess.thecvf.com/content/CVPR2025/html/Chen_Galaxy_Walker_Geometry-aware_VLMs_For_Galaxy-scale_Understanding_CVPR_2025_paper.html" target="_blank" rel="noopener noreferrer">paper</a></div>
+          </div>
+        </article>
+
+        <article class="publication">
+          <div><span class="venue blue">DAI 2025</span></div>
+          <div>
+            <h3>SIGMA: A Dual-Agent Reinforcement Learning-Optimized Framework for Graph Classification.</h3>
+            <div class="authors">Xinbang Cheng, Haodong Qian, <strong>Yisen Gao</strong>, Xingcheng Fu, Rongye Shi.</div>
+            <div class="pub-links"><a href="https://doi.org/10.1145/3772429.3772433" target="_blank" rel="noopener noreferrer">paper</a></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <h2>2024</h2>
+      </div>
+      <div class="publication-list">
+        <article class="publication">
+          <div><span class="venue">ICML 2024</span></div>
+          <div>
+            <h3>Hyperbolic Geometric Latent Diffusion Model for Graph Generation.</h3>
+            <div class="authors">Xingcheng Fu, <strong>Yisen Gao</strong>, Yuecen Wei, Qingyun Sun, Hao Peng, Jianxin Li, Xianxian Li.</div>
+            <div class="pub-links"><a href="https://proceedings.mlr.press/v235/fu24c.html" target="_blank" rel="noopener noreferrer">paper</a></div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="page">
+      Last updated in June 2026. Publication data cross-checked with
+      <a href="https://dblp.org/pid/377/2092.html" target="_blank" rel="noopener noreferrer">DBLP</a>,
+      <a href="https://scholar.google.com/citations?user=MMxR_uYAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Google Scholar</a>,
+      arXiv, and OpenReview.
+    </div>
+  </footer>
+</body>
+</html>
