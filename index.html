@@ -395,6 +395,22 @@
       background: #e2ebfb;
     }
 
+    .presentation {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 8px;
+      min-width: 58px;
+      min-height: 26px;
+      padding: 3px 8px;
+      border-radius: var(--radius);
+      color: #ffffff;
+      background: #dc2626;
+      font-size: 0.75rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
     .authors {
       margin-top: 7px;
       color: var(--muted);
@@ -672,7 +688,10 @@
         </article>
 
         <article class="publication selected rank-2">
-          <div><span class="venue">WWW 2026</span></div>
+          <div>
+            <span class="venue">WWW 2026</span>
+            <span class="presentation">Oral</span>
+          </div>
           <div>
             <h3>Unifying Deductive and Abductive Reasoning in Knowledge Graphs with Masked Diffusion Model.</h3>
             <div class="authors"><strong>Yisen Gao</strong>, Jiaxin Bai, Yi Huang, Xingcheng Fu, Qingyun Sun, Yangqiu Song.</div>
@@ -782,7 +801,10 @@
         </article>
 
         <article class="publication selected rank-6">
-          <div><span class="venue alt">AAAI 2025</span></div>
+          <div>
+            <span class="venue alt">AAAI 2025</span>
+            <span class="presentation">Oral</span>
+          </div>
           <div>
             <h3>Bi-Directional Multi-Scale Graph Dataset Condensation via Information Bottleneck.</h3>
             <div class="authors">Xingcheng Fu<sup class="cofirst">*</sup>, <strong>Yisen Gao<sup class="cofirst">*</sup></strong>, Beining Yang, Yuxuan Wu, Haodong Qian, Qingyun Sun, Xianxian Li.</div>
