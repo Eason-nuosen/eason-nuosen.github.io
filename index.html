@@ -92,6 +92,7 @@
     }
 
     .hero {
+      order: 1;
       display: grid;
       grid-template-columns: minmax(240px, 0.72fr) minmax(0, 1.28fr);
       gap: 52px;
@@ -201,6 +202,31 @@
     .section {
       padding: 54px 0;
       border-top: 1px solid var(--line);
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #about {
+      order: 2;
+    }
+
+    #research {
+      order: 3;
+    }
+
+    #news {
+      order: 4;
+    }
+
+    #publications {
+      order: 5;
+    }
+
+    #life {
+      order: 6;
     }
 
     .section-head {
@@ -547,9 +573,9 @@
       <div class="nav-links">
         <a href="#about">About</a>
         <a href="#research">Research</a>
+        <a href="#news">News</a>
         <a href="#publications">Selected</a>
         <a href="publications.html">All Publications</a>
-        <a href="#news">News</a>
         <a href="#life">Life</a>
       </div>
     </nav>
